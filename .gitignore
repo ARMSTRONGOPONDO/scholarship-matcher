@@ -6,3 +6,21 @@ __pycache__/
 **/.env
 .env/
 *.env
+
+# Security and sensitive files
+logs/
+*.log
+db.sqlite3
+media/
+staticfiles/
+.coverage
+htmlcov/
+
+# Development files
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+Thumbs.db
+.DS_Store

@@ -7,3 +7,8 @@ twilio
 sendgrid
 redis
 django-redis
+
+# Optional security dependencies (uncomment as needed)
+# python-magic  # For MIME type detection in file uploads
+# pillow        # For image processing and validation
+# cryptography  # For additional encryption features

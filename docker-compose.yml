@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile
     command: >
       sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             python manage.py security_check --check-config &&
              python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code:Z
@@ -21,6 +23,12 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    # Security: Limit resources
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '1.0'
 
   nginx:
     image: nginx:latest
@@ -31,12 +39,21 @@ services:
       - nginx_cache:/var/cache/nginx
     depends_on:
       - web
-    user: root
+    # Security: Run as non-root user
+    user: "101:101"  # nginx user in the container
     command: >
-      /bin/bash -c "
-        mkdir -p /var/cache/nginx &&
-        chown -R nginx:nginx /var/cache/nginx &&
-        nginx -g 'daemon off;'"
+      /bin/sh -c "
+        # Create necessary directories with proper permissions
+        mkdir -p /var/cache/nginx /var/run &&
+        chown -R nginx:nginx /var/cache/nginx /var/run &&
+        # Start nginx
+        exec nginx -g 'daemon off;'"
+    # Security: Limit resources
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: '0.5'
 
 
 

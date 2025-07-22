@@ -3,4 +3,4 @@ __pycache__/
 *.sqlite3
 *.swp
 .DS_Store
-.env
+**/.env

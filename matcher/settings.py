@@ -69,6 +69,9 @@ WSGI_APPLICATION = 'matcher.wsgi.application'
 # Database
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    } if env('USE_SQLITE', default=True) else {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': env('DB_NAME'),
         'USER': env('DB_USER'),

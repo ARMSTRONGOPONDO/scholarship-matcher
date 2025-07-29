@@ -1,5 +1,41 @@
-
 services:
+  # ──────────────────────────────────────────────────────────────────────────────
+  # 1) GitHub MCP proxy service
+  # ──────────────────────────────────────────────────────────────────────────────
+  mcp-proxy:
+    image: node:18-alpine
+    container_name: mcp-proxy
+    working_dir: /usr/src/app
+    volumes:
+      - ./mcp-proxy:/usr/src/app
+    command: >
+      sh -c "apk add --no-cache wget curl git procps &&
+             echo 'Setting up MCP proxy service...' &&
+             if [ ! -f package.json ]; then npm init -y; fi &&
+             npm install express cors body-parser node-fetch@2 &&
+             node server.js"
+    env_file:
+      - .env
+    environment:
+      - GITHUB_MCP_PAT=${GITHUB_MCP_PAT}
+      - MCP_API_URL=https://api.githubcopilot.com/
+      - PORT=6010
+    ports:
+      - "6020:6010"  # Use port 6020 on host to avoid conflicts
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-O-", "http://localhost:6010/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    privileged: true
+    # Comment out network_mode to use Docker's bridge networking instead
+    # network_mode: "host"
+
+  # ──────────────────────────────────────────────────────────────────────────────
+  # 2) Your existing web service
+  # ──────────────────────────────────────────────────────────────────────────────
   web:
     build:
       context: .
@@ -9,11 +45,14 @@ services:
              python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code:Z
+      - ./.vscode:/code/.vscode
     env_file:
-      - .env  # 
+      - .env
     environment:
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
+      # Tell your app (or any sidecar scripts) where to reach MCP:
+      - MCP_SERVER_URL=http://mcp-proxy:6010/sse  # This stays the same - internal Docker network
     ports:
       - "8000:8000"
     depends_on:
@@ -21,11 +60,16 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      mcp-proxy:
+        condition: service_started
 
+  # ──────────────────────────────────────────────────────────────────────────────
+  # 3) The rest of your stack (nginx, db, redis, pgadmin…)
+  # ──────────────────────────────────────────────────────────────────────────────
   nginx:
     image: nginx:latest
     ports:
-      - "80:80"
+      - "80"
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d:Z,ro
       - nginx_cache:/var/cache/nginx
@@ -37,8 +81,6 @@ services:
         mkdir -p /var/cache/nginx &&
         chown -R nginx:nginx /var/cache/nginx &&
         nginx -g 'daemon off;'"
-
-
 
   db:
     image: postgres:13
@@ -68,7 +110,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
     ports:
-      - "5051:80"
+      - "80"
     depends_on:
       - db
 

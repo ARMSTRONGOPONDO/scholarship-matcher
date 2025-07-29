@@ -6,3 +6,6 @@ __pycache__/
 **/.env
 .env/
 *.env
+
+# Google Cloud Credentials
+GovChatbotFAQ/config/gcp-credentials.json

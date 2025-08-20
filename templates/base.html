@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mindful Space | Mental Health Resources</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'css/podcast.css' %}">
+        <script src="{% static 'js/main.js' %}" defer></script>
+        
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <i class="fas fa-brain"></i>
+                        <span>Mindful Space</span>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                            <li><a href="#"><i class="fas fa-book"></i> Resources</a></li>
+                            <li><a href="#"><i class="fas fa-user-md"></i> Therapists</a></li>
+                            <li><a href="#"><i class="fas fa-comments"></i> Community</a></li>
+                            <li><a href="#"><i class="fas fa-heart"></i> Self-Care</a></li>
+                        </ul>
+                    </nav>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Your Mental Wellness Journey Starts Here</h1>
+                    <p>Discover resources, support, and guidance for your mental health journey. You're not alone.</p>
+
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search for articles, therapists, or topics...">
+                        <button id="searchButton"><i class="fas fa-search"></i> Search Resources</button>
+                    </div>
+                    
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary"><i class="fas fa-hands-helping"></i> Get Support Now</button>
+                        <button class="btn btn-secondary"><i class="fas fa-book-open"></i> Explore Resources</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Categories -->
+            <h2 class="section-title">Explore Resources</h2>
+            <p class="section-subtitle">Discover helpful content tailored to your mental wellness journey</p>
+            <div class="categories">
+                <div class="category active" data-category="all">
+                    <i class="fas fa-star"></i>
+                    <span>All</span>
+                </div>
+                <div class="category" data-category="article">
+                    <i class="fas fa-book"></i>
+                    <span>Articles</span>
+                </div>
+                <div class="category" data-category="video">
+                    <i class="fas fa-video"></i>
+                    <span>Videos</span>
+                </div>
+                <div class="category" data-category="podcast">
+                    <i class="fas fa-headphones"></i>
+                    <span>Podcasts</span>
+                </div>
+                <div class="category" data-category="app">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Apps</span>
+                </div>
+            </div>
+
+            <!-- Resources Grid -->
+            <div class="resources-grid" id="resourcesContainer">
+                <div class="data-loading">
+                    <div class="spinner"></div>
+                    <p>Loading mental health resources...</p>
+                </div>
+            </div>
+
+            <!-- Mental Health Conditions -->
+            <h2 class="section-title">Mental Health Disorders</h2>
+            <p class="section-subtitle">Understanding these conditions is the first step toward wellness</p>
+            <div class="conditions">
+                <div class="condition-grid" id="conditionsContainer">
+                    <div class="data-loading">
+                        <div class="spinner"></div>
+                        <p>Loading mental health disorders...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats">
+                <div class="stats-grid" id="statsContainer">
+                    <div class="data-loading">
+                        <div class="spinner"></div>
+                        <p>Loading mental health statistics...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Therapists Section -->
+            <h2 class="section-title">Mental Health Professionals</h2>
+            <p class="section-subtitle">Connect with licensed professionals who can help</p>
+            <div class="therapists">
+                <div class="therapists-grid" id="therapistsContainer">
+                    <div class="data-loading">
+                        <div class="spinner"></div>
+                        <p>Loading therapist information...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crisis Section -->
+            <div class="crisis-section">
+                <h2>Need Immediate Help?</h2>
+                <p>If you're in crisis or experiencing suicidal thoughts, reach out to these 24/7 support lines</p>
+                <div class="crisis-numbers" id="crisisContainer">
+                    <div class="data-loading">
+                        <div class="spinner"></div>
+                        <p>Loading crisis resources...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="newsletter">
+                <h2>Stay Informed</h2>
+                <p>Subscribe to our newsletter for the latest mental health resources, research updates, and wellness tips.
+                </p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" id="emailInput" placeholder=opondoarmstrong1@gmail.com required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>Mindful Space</h3>
+                        <p>Providing accessible mental health resources and support to help you on your wellness journey.
+                        </p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Resources</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Find a Therapist</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Community Forum</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Crisis Support</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Articles</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Self-Help Tools</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Mental Health Tests</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Podcasts</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Mobile Apps</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Contact Us</h3>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-envelope"></i> support@mindfulspace.org</a></li>
+                            <li><a href="#"><i class="fas fa-phone"></i> (+254) 123-4567</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> San Francisco, CA</a></li>
+                            <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                            <li><a href="#"><i class="fas fa-file-alt"></i> Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 Mindful Space. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms
+                            of Service</a> | <a href="#">Accessibility Statement</a></p>
+                </div>
+            </div>
+        </footer>
+    </body>
+
+</html>

@@ -1,9 +1,13 @@
 django
 djangorestframework
 django-environ
+whitenoise
 psycopg2-binary
 celery[redis]
 twilio
 sendgrid
 redis
 django-redis
+requests
+python-podcastindex
+Pillow  # Required for ImageField

@@ -20,7 +20,7 @@ This project is a chatbot that provides information about government services.
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/ARMSTRONGOPONDO/scholarship-matcher.git
+    git clone https://github.com/ARMSTRONGOPONDO/mental-health-platform.git
     ```
 2.  Install the dependencies:
     ```bash

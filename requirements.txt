@@ -7,3 +7,5 @@ twilio
 sendgrid
 redis
 django-redis
+requests
+Pillow

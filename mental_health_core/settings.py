@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',  # Added DRF
+    'mental_health',  # Mental health app
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,7 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+
+# Podcast Index API Configuration
+PODCAST_INDEX_API_KEY = env('PODCAST_INDEX_API_KEY', default=None)
+PODCAST_INDEX_API_SECRET = env('PODCAST_INDEX_API_SECRET', default=None)
